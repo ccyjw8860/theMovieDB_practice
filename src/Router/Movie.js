@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPopularMoives } from "../redux/Movie/MovieSlice";
 import styled from "styled-components";
 
+const DIV_0 = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const BTN = styled.button``;
+
 const DIV_1 = styled.div`
   display: flex;
   justify-content: center;
@@ -31,32 +38,41 @@ const LINK = styled.a``;
 const Movie = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  const { data } = useSelector((state) => state.MovieReducer);
+  const { titles, imgPaths, ratings, ids } = useSelector(
+    (state) => state.MovieReducer
+  );
 
   const renderMovies = () => {
-    if (data !== null) {
-      const { titles, imgPaths, ratings, ids } = data;
+    if (titles.length !== 0) {
       const baseUrl = "https://image.tmdb.org/t/p/original/";
-      const html = titles.map((title, idx) => (
-        <LINK href={`/movie/${ids[idx]}`}>
-          <DIV>
-            <H1>{title}</H1>
-            <IMG src={`${baseUrl}${imgPaths[idx]}`} />
-            <P>{ratings[idx]}</P>
-          </DIV>
-        </LINK>
-      ));
+      const html = titles.map((title, idx) => {
+        return (
+          <LINK href={`/movie/${ids[idx]}`}>
+            <DIV>
+              <H1>{title}</H1>
+              <IMG src={`${baseUrl}${imgPaths[idx]}`} />
+            </DIV>
+          </LINK>
+        );
+      });
       return html;
     }
   };
 
-  renderMovies();
+  const increasePage = () => {
+    setPage(page + 1);
+  };
 
   useEffect(() => {
     dispatch(fetchPopularMoives(page));
-  }, [dispatch]);
-
-  return <DIV_1>{renderMovies()}</DIV_1>;
+  }, [page]);
+  // return <div>MOVIE</div>;
+  return (
+    <DIV_0>
+      <DIV_1>{renderMovies()}</DIV_1>
+      <BTN onClick={increasePage}>load more</BTN>
+    </DIV_0>
+  );
 };
 
 export default Movie;

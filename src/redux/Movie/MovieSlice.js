@@ -3,7 +3,10 @@ import callApi from "../../api";
 
 const initialState = {
   loading: null,
-  data: null,
+  titles: [],
+  imgPaths: [],
+  ratings: [],
+  ids: [],
   error: null,
 };
 
@@ -14,9 +17,13 @@ const MovieSlice = createSlice({
     loadingMovies: (state) => {
       state.loading = true;
     },
-    getPopularMovies: (state, action) => {
+    getPopularMovies: (state, { payload }) => {
+      const { titles, imgPaths, ratings, ids } = payload;
       state.loading = false;
-      state.data = action.payload;
+      state.titles = [...state.titles, ...titles];
+      state.imgPaths = [...state.imgPaths, ...imgPaths];
+      state.ratings = [...state.ratings, ...ratings];
+      state.ids = [...state.ids, ...ids];
     },
     rejectedMovies: (state, action) => {
       state.error = true;

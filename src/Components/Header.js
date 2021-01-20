@@ -24,11 +24,8 @@ const Header = ({ location: { pathname } }) => {
       <LI tf={pathname === "/movie"}>
         <LINK href={"/movie"}>MOVIE</LINK>
       </LI>
-      <LI tf={pathname === "/tv"}>
-        <LINK href={"/tv"}>TV</LINK>
-      </LI>
-      <LI tf={pathname === "/"}>
-        <LINK href={"/"}>Home</LINK>
+      <LI tf={pathname === "/search"}>
+        <LINK href={"/search"}>Search</LINK>
       </LI>
     </UL>
   );
