@@ -38,7 +38,7 @@ const Movie = () => {
       const { titles, imgPaths, ratings, ids } = data;
       const baseUrl = "https://image.tmdb.org/t/p/original/";
       const html = titles.map((title, idx) => (
-        <LINK href={}>
+        <LINK href={`/movie/${ids[idx]}`}>
           <DIV>
             <H1>{title}</H1>
             <IMG src={`${baseUrl}${imgPaths[idx]}`} />

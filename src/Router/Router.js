@@ -4,6 +4,7 @@ import Header from "../Components/Header";
 import Home from "./Home";
 import Movie from "./Movie";
 import TV from "./TV";
+import Detail from "./Detail";
 import store from "../redux/store";
 
 const Routers = () => {
@@ -16,6 +17,7 @@ const Routers = () => {
           <Provider store={store}>
             <Route path="/movie" exact component={Movie} />
             <Route path="/tv" exact component={TV} />
+            <Route path="/movie/:id" exact component={Detail} />
           </Provider>
         </Switch>
       </>
